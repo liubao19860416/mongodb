@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<venus-client>
+    <services>
+        <!-- file -->
+        <service beanName="mongoFileService" type="com.saic.ebiz.mongodb.service.api.IMongoFileService">
+            <property name="ipAddressList">127.0.0.1:16800</property>
+        </service>
+        <!-- shangpin信息服务 -->
+        <service beanName="mongoMdseService" type="com.saic.ebiz.mongodb.service.api.IMongoMdseService">
+            <property name="ipAddressList">127.0.0.1:16800</property>
+        </service>
+         <!-- shangpin信息服务 -->
+        <service beanName="mongoBatchService" type="com.saic.ebiz.mongodb.service.api.IMongoBatchService">
+            <property name="ipAddressList">127.0.0.1:16800</property>
+        </service>         
+    </services>
+</venus-client>

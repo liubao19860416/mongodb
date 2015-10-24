@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cxf="http://cxf.apache.org/core"
+    xmlns:p="http://cxf.apache.org/policy" xmlns:ss="http://www.springframework.org/schema/security"
+    xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+    http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+    http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+    http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
+    http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+  
+	<!-- mongo db defination -->    
+    <mongo:mongo id="mongo" replica-set="${component.mongodb.mall.replicationSet}">
+		<!-- 连接属性 -->
+		<mongo:options connections-per-host="${component.mongodb.mall.connectionPerHost}" 
+			threads-allowed-to-block-for-connection-multiplier="${component.mongodb.mall.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${component.mongodb.mall.connectionTimeout}" max-wait-time="${component.mongodb.mall.maxWaitTime}" auto-connect-retry="${component.mongodb.mall.autoConnectRetry}"
+			socket-keep-alive="${component.mongodb.mall.socketKeepAlive}" socket-timeout="${component.mongodb.mall.socketTimeout}" slave-ok="${component.mongodb.mall.slaveOk}"
+			write-number="${component.mongodb.mall.writeNumber}" write-timeout="${component.mongodb.mall.writeTimeout}" write-fsync="${component.mongodb.mall.writeFsync}" />
+	</mongo:mongo>
+
+	<!-- 连接工厂 指定db名  username="${mongo.username}" password="${mongo.password}"  -->
+	<mongo:db-factory id="mongoDbFactory" dbname="${component.mongodb.mall.dbname}"
+		mongo-ref="mongo" username="" password="" />
+	
+	<!--  annotation支持  --> 
+    <context:component-scan base-package="com.saic.ebiz" />
+    
+    <!-- media storage -->
+    <import resource="classpath:/conf/applicationContext-filestorage.xml"/>
+</beans>

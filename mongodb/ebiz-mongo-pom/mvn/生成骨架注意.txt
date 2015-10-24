@@ -1,0 +1,61 @@
+1   pom项目：
+1.1 comment out <modules>
+1.2 到sample-pom下面执行： mvn archetype:create-from-project
+1.3 /target/generated-sources/archetype/pom.xml:
+  <groupId>com.saic.ebiz</groupId>
+  <artifactId>saic-archetype-pom</artifactId>
+  <name>saic-archetype-pom</name>
+1.4 /target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+1.4.1:
+<artifactId>${artifactId}-pom</artifactId>
+<name>${artifactId}-pom</name>
+1.4.2:
+	<scm><!-- 注意：必须是正确的svn路径 -->
+		<url>http://svncode.cnsaic.com/svn/${artifactId}/trunk/${project.name}</url>
+		<connection>scm:svn:http://svncode.cnsaic.com/svn/${artifactId}/trunk/${project.name}</connection>
+	</scm>
+1.4.3:
+在最后面加上
+	<modules>
+		<module>../${artifactId}-intf</module>
+		<module>../${artifactId}-service</module>
+		<module>../${artifactId}-web</module>
+		<module>../${artifactId}-web-in</module>
+		<module>../${artifactId}-hs</module>
+		<module>../${artifactId}-hsproxy</module>
+		<module>../${artifactId}-ws</module>
+		<module>../${artifactId}-wsproxy</module>
+	</modules>
+1.4.4
+replace "sample-" to "${artifactId}-"
+replace com.saic.sample" to "${groupId}"
+
+1.5 /sample-pom/target/generated-sources/archetype mvn clean deploy
+
+2   其它项目
+2.1 /target/generated-sources/archetype/pom.xml:
+  <groupId>com.saic.ebiz</groupId>
+  <artifactId>saic-archetype-xxx</artifactId>
+  <name>saic-archetype-xxx</name>
+如：service的xxx换成service
+
+
+2.2 /target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml
+2.2.1
+	<artifactId>${artifactId}-xxx</artifactId>
+	<name>${artifactId}-xxx</name>
+注意：jdbc,impl,myBatis的xxx都是service
+2.2.2
+删除<version>,<groupId>,<url>
+
+2.2.3
+	<parent>
+		<groupId>${groupId}</groupId>
+		<artifactId>${artifactId}-pom</artifactId>
+		<version>${version}</version>
+		<relativePath>../${artifactId}-pom/pom.xml</relativePath>
+	</parent>
+2.2.4
+replace "sample-" to "${artifactId}-"
+replace com.saic.sample" to "${groupId}"
+

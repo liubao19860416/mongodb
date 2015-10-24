@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<venus-server>
+    <services>
+    	<!-- mongo file 服务-->
+        <service type="com.saic.ebiz.mongodb.service.api.IMongoFileService">
+            <property name="instance">${MongoFileService}</property>
+        </service>
+        
+        <!-- mongo 商品服务-->
+        <service type="com.saic.ebiz.mongodb.service.api.IMongoMdseService">
+            <property name="instance">${MongoMdseService}</property>
+        </service>
+        
+        <!-- mongo 静态页面 生成服务 -->
+        <service type="com.saic.ebiz.mongodb.service.api.IMongoHtmlService">
+            <property name="instance">${MongoHtmlService}</property>
+        </service>
+        
+        <!-- mongo 商品服务-->
+        <service type="com.saic.ebiz.mongodb.service.api.IMongoBatchService">
+            <property name="instance">${MongoBatchService}</property>
+        </service>
+        
+    </services>
+</venus-server>
